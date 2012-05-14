@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.jquery</groupId>
+    <artifactId>jquery.datatables</artifactId>
+    <name>jquery Datatables plugin</name>
+    <version>1.9.1</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jquery.datatables.version>1.9.1</jquery.datatables.version>
+        <jquery.treeview.sourceUrl>http://datatables.net/releases</jquery.treeview.sourceUrl>
+        <destDir>${project.build.directory}/classes/public</destDir>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals><goal>download-single</goal></goals>
+                        <configuration>
+                            <url>${jquery.treeview.sourceUrl}</url>
+                            <fromFile>DataTables-${jquery.datatables.version}.zip</fromFile>
+                            <toFile>${project.build.directory}/DataTables.zip</toFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <echo message="unzip archive" />
+                                <unzip src="${project.build.directory}/DataTables.zip" dest="${project.build.directory}/DataTables" />
+                                <echo message="moving javascripts resources" />
+                                <copy todir="${destDir}/javascripts" overwrite="true" verbose="true">
+                                    <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/js" includes="jquery.dataTables*.js" />
+                                </copy>
+                                <echo message="moving style resources" />
+                                <copy todir="${destDir}/stylesheets" overwrite="true" verbose="true">
+                                    <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/css" includes="jquery.dataTables*.css" />
+                                </copy>
+                                <copy todir="${destDir}/stylesheets/images" overwrite="true" verbose="true">
+                                    <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/images" includes="*.png" />
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
