@@ -50,7 +50,7 @@
                                 <copy todir="${destDir}/stylesheets" overwrite="true" verbose="true">
                                     <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/css" includes="jquery.dataTables*.css" />
                                 </copy>
-                                <copy todir="${destDir}/stylesheets/images" overwrite="true" verbose="true">
+                                <copy todir="${destDir}/images" overwrite="true" verbose="true">
                                     <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/images" includes="*.png" />
                                 </copy>
                             </target>
