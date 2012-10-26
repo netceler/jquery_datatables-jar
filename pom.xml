@@ -4,11 +4,11 @@
     <groupId>com.jquery</groupId>
     <artifactId>jquery.datatables</artifactId>
     <name>jquery Datatables plugin</name>
-    <version>1.9.1</version>
+    <version>1.9.4</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jquery.datatables.version>1.9.1</jquery.datatables.version>
+        <jquery.datatables.version>1.9.4</jquery.datatables.version>
         <jquery.treeview.sourceUrl>http://datatables.net/releases</jquery.treeview.sourceUrl>
         <destDir>${project.build.directory}/classes/public</destDir>
     </properties>
