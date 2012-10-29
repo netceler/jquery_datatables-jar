@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.jquery</groupId>
+    <groupId>org.webjars</groupId>
     <artifactId>jquery.datatables</artifactId>
     <name>jquery Datatables plugin</name>
     <version>1.9.4</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jquery.datatables.version>1.9.4</jquery.datatables.version>
-        <jquery.treeview.sourceUrl>http://datatables.net/releases</jquery.treeview.sourceUrl>
-        <destDir>${project.build.directory}/classes/public</destDir>
+        <jquery.datatables.version>${project.version}</jquery.datatables.version>
+        <jquery.datatables.sourceUrl>http://datatables.net/releases</jquery.datatables.sourceUrl>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${jquery.datatables.version}</destDir>
     </properties>
     <build>
         <plugins>
@@ -23,7 +23,7 @@
                         <phase>process-resources</phase>
                         <goals><goal>download-single</goal></goals>
                         <configuration>
-                            <url>${jquery.treeview.sourceUrl}</url>
+                            <url>${jquery.datatables.sourceUrl}</url>
                             <fromFile>DataTables-${jquery.datatables.version}.zip</fromFile>
                             <toFile>${project.build.directory}/DataTables.zip</toFile>
                         </configuration>
@@ -50,6 +50,7 @@
                                 <copy todir="${destDir}/stylesheets" overwrite="true" verbose="true">
                                     <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/css" includes="jquery.dataTables*.css" />
                                 </copy>
+                                <echo message="moving imagese resources" />
                                 <copy todir="${destDir}/images" overwrite="true" verbose="true">
                                     <fileset dir="${project.build.directory}/DataTables/DataTables-${jquery.datatables.version}/media/images" includes="*.png" />
                                 </copy>
